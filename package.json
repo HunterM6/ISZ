@@ -1,0 +1,33 @@
+{
+  "name": "emksk_boilerplate",
+  "version": "1.0.0",
+  "description": "\"# omsPoc\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.16.0 latest",
+    "cfenv": "1.0.3 latest",
+    "cookie-parser": "1.4.3 latest",
+    "ejs": "2.5.5 latest",
+    "express": "4.14.0 latest",
+    "express-favicon": "2.0.0 latest",
+    "express-session": "1.14.2 latest",
+    "shortid": "2.2.6 latest",
+    "watson-developer-cloud": "^2.42.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "wiredep": "^4.0.0"
+  }
+}
