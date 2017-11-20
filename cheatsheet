@@ -1,0 +1,104 @@
+var config = require('../../config.js');
+var watson = require('watson-developer-cloud');
+
+module.exports = {
+  watsonConversationSendMessage
+  // getEvents, getEvent, addEvent to ADD export funtions!!
+};
+
+var conversation = watson.conversation({
+  username: config.watsonConversationUsername,
+  password: config.watsonConversationPassword,
+  version: 'v1',
+  version_date: '2017-05-26'
+});
+
+function watsonConversationSendMessage(userInput, callback) {
+  conversation.message({
+    workspace_id: config.watsonWorkspaceID,
+    input: {
+      'text': userInput
+    }
+  }, function(err, response) {
+    if (err){
+      console.log('error:', err);
+      callback(err);
+    }else{
+      console.log(JSON.stringify(response, null, 2));
+      callback(response);
+    }
+  });
+};
+
+-----frontend-------------------------------------------------------------------------------
+<script type="text/javascript">
+  $.ajaxSetup({
+    beforeSend: function() {
+      $('#loader').show();
+    },
+    complete: function() {
+      $('#loader').hide();
+    },
+    success: function() {}
+  });
+
+  $(document).ready(function() {
+    $(function() {
+      $("#submitInput").on("click", function() {
+        $.ajax({
+          type: 'POST',
+          data: {
+            'message': $("#questionInput").val()
+          },
+          url: '/askWatson',
+          success: function(result) {
+            $('#conversationWindow').append('<p> <b>me:</b> ' + $("#questionInput").val() + '</p>');
+            $('#conversationWindow').append('<p> <b>watson:</b> ' + result.answer.output.text[0] + '</p>');
+            $('#jsonResponse').html(JSON.stringify(result, null, 2));
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<div id="conversationWindow" style="display:block;border:1px solid black;width:100%;height:400px;overflow:scroll" class="ibm-border-blue-20">
+
+</div>
+<p>
+  <span>
+       <input type="text" value="" size="40" id="questionInput" name="questionInput">
+    </span>
+</p>
+<p>
+  <span>
+     <button id='submitInput' type="button" class="ibm-center ibm-btn-pri ibm-btn-blue-50">Send</button>
+   </span>
+</p>
+
+</div>
+<div class="ibm-col-6-3 ibm-col-medium-6-3">
+<div id='jsonResponse' style="display:block;border:1px solid black;width:100%;height:400px">
+
+</div>
+<div id='loader' class="ibm-h1 ibm-spinner" style="display:none">
+</div>
+</div>
+
+
+<div id="ibm-related-content">
+  <div id="ibm-merchandising-module">
+  </div>
+</div>
+
+------------------------backend routing----------------------------------------------------------------
+
+var watsonConversation = require('./src/integration/watsonConversation.js');
+
+app.post('/askWatson', function(req, res) {
+    console.log('here!!');
+    console.log(req.body.message);
+    watsonConversation.watsonConversationSendMessage(req.body.message, function (data){
+      res.send({answer: data});
+    });
+  });

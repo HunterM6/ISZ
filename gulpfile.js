@@ -3,7 +3,6 @@ var nodemon = require('gulp-nodemon');
 
 var jsFiles = ['*.js', 'src/**/*.js'];
 
-
 gulp.task('style', function () {
 	return gulp.src(jsFiles)
 		.pipe(jshint())
@@ -12,7 +11,6 @@ gulp.task('style', function () {
 		}))
 		.pipe(jscs());
 });
-
 
 gulp.task('serve', function () {
 	var options = {
