@@ -6,6 +6,7 @@ var session = require('express-session');
 var app = express();
 var port = process.env.PORT || 3000;
 var appEnv = cfenv.getAppEnv();
+var watsonConversation = require('./src/integration/watsonConversation.js');
 
 
 app.use(express.static('public'));
@@ -30,6 +31,14 @@ app.get('/', function (req, res) {
         title: 'Hello from render',
     });
 });
+
+app.post('/askWatson', function(req, res) {
+    console.log('here!!');
+    console.log(req.body.message);
+    watsonConversation.watsonConversationSendMessage(req.body.message, function (data){
+      res.send({answer: data});
+    });
+  });
 
 app.listen(appEnv.port, function (err) {
     console.log('listens on' + appEnv.url);

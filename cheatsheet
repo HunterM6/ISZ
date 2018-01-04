@@ -62,35 +62,32 @@ function watsonConversationSendMessage(userInput, callback) {
   });
 </script>
 
-<div id="conversationWindow" style="display:block;border:1px solid black;width:100%;height:400px;overflow:scroll" class="ibm-border-blue-20">
+<div id="ibm-content-main">
+  <div class="ibm-columns">
+    <div class="ibm-col-6-3 ibm-col-medium-6-3">
+      <div id="conversationWindow" style="display:block;border:1px solid black;width:100%;height:400px;overflow:scroll" class="ibm-border-blue-20">
 
-</div>
-<p>
-  <span>
-       <input type="text" value="" size="40" id="questionInput" name="questionInput">
-    </span>
-</p>
-<p>
-  <span>
-     <button id='submitInput' type="button" class="ibm-center ibm-btn-pri ibm-btn-blue-50">Send</button>
-   </span>
-</p>
+      </div>
+      <p>
+        <span>
+           <input type="text" value="" size="40" id="questionInput" name="questionInput">
+        </span>
+      </p>
+      <p>
+        <span>
+         <button id='submitInput' type="button" class="ibm-center ibm-btn-pri ibm-btn-blue-50">Send</button>
+       </span>
+      </p>
+    </div>
+    <div class="ibm-col-6-3 ibm-col-medium-6-3">
+      <div id='jsonResponse' style="display:block;border:1px solid black;width:100%;height:400px">
 
-</div>
-<div class="ibm-col-6-3 ibm-col-medium-6-3">
-<div id='jsonResponse' style="display:block;border:1px solid black;width:100%;height:400px">
-
-</div>
-<div id='loader' class="ibm-h1 ibm-spinner" style="display:none">
-</div>
-</div>
-
-
-<div id="ibm-related-content">
-  <div id="ibm-merchandising-module">
+      </div>
+      <div id='loader' class="ibm-h1 ibm-spinner" style="display:none">
+      </div>
+    </div>
   </div>
 </div>
-
 ------------------------backend routing----------------------------------------------------------------
 
 var watsonConversation = require('./src/integration/watsonConversation.js');
